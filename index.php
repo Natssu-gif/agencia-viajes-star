@@ -6,12 +6,29 @@ $tipo = $_GET["tipo"] ?? "";
 
 
 /* =========================
-   RECUPERAR VUELOS
+   BUSCAR Y RECUPERAR VUELOS
    ========================= */
 
-$consultaVuelos = $conexion->query(
-    "SELECT * FROM VUELO ORDER BY id_vuelo ASC"
-);
+$buscarOrigen = trim($_GET["buscar_origen"] ?? "");
+$buscarDestino = trim($_GET["buscar_destino"] ?? "");
+
+$sqlVuelos = "SELECT * FROM VUELO WHERE 1=1";
+$parametrosVuelos = [];
+
+if ($buscarOrigen !== "") {
+    $sqlVuelos .= " AND origen LIKE :origen";
+    $parametrosVuelos["origen"] = "%" . $buscarOrigen . "%";
+}
+
+if ($buscarDestino !== "") {
+    $sqlVuelos .= " AND destino LIKE :destino";
+    $parametrosVuelos["destino"] = "%" . $buscarDestino . "%";
+}
+
+$sqlVuelos .= " ORDER BY id_vuelo ASC";
+
+$consultaVuelos = $conexion->prepare($sqlVuelos);
+$consultaVuelos->execute($parametrosVuelos);
 
 $vuelos = $consultaVuelos->fetchAll();
 
@@ -454,7 +471,69 @@ $hotelesReservados =
     <!-- =========================
          VUELOS REGISTRADOS
          ========================= -->
+   <section class="reserva">
 
+    <div class="titulo-seccion">
+        <div>
+            <h2>🔎 Buscar vuelos</h2>
+            <p>
+                Filtra los vuelos disponibles por ciudad de origen o destino.
+            </p>
+        </div>
+    </div>
+
+    <form class="form-reserva" method="GET" action="index.php">
+
+        <div class="campo-reserva">
+            <label for="buscar_origen">
+                Ciudad de origen
+            </label>
+
+            <input
+                type="text"
+                id="buscar_origen"
+                name="buscar_origen"
+                placeholder="Ej: Santiago"
+                value="<?php echo htmlspecialchars($buscarOrigen); ?>"
+            >
+        </div>
+
+        <div class="campo-reserva">
+            <label for="buscar_destino">
+                Ciudad de destino
+            </label>
+
+            <input
+                type="text"
+                id="buscar_destino"
+                name="buscar_destino"
+                placeholder="Ej: Cancún"
+                value="<?php echo htmlspecialchars($buscarDestino); ?>"
+            >
+        </div>
+
+        <div class="campo-boton">
+            <button type="submit">
+                Buscar vuelos
+            </button>
+        </div>
+
+    </form>
+
+    <?php if ($buscarOrigen !== "" || $buscarDestino !== ""): ?>
+
+        <p class="descripcion">
+            Se encontraron
+            <strong><?php echo count($vuelos); ?></strong>
+            vuelo(s) que coinciden con la búsqueda.
+            <a href="index.php">Mostrar todos</a>
+        </p>
+
+    <?php endif; ?>
+
+</section>
+
+   
     <section class="datos">
 
         <div class="titulo-seccion">

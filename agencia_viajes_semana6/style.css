@@ -1,0 +1,240 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f4f6f8;
+    color: #222;
+}
+
+header {
+    background-color: white;
+    padding: 25px 8%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+header h1 {
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #666;
+}
+
+main {
+    width: 84%;
+    margin: 40px auto;
+}
+
+
+/* FORMULARIOS */
+
+.formularios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.tarjeta {
+    background-color: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tarjeta h2 {
+    margin-bottom: 8px;
+}
+
+.descripcion {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+    background-color: white;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #222;
+}
+
+button {
+    border: none;
+    padding: 13px;
+    border-radius: 8px;
+    background-color: #222;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+
+/* MENSAJES */
+
+.mensaje {
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+}
+
+.mensaje.exito {
+    background-color: #dff5e4;
+    color: #1e652e;
+}
+
+.mensaje.error {
+    background-color: #f8dddd;
+    color: #8a2020;
+}
+
+
+/* RESERVAS */
+
+.reserva {
+    margin-top: 35px;
+    background-color: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-reserva {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.campo-reserva {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-reserva select {
+    margin-bottom: 0;
+}
+
+.campo-boton {
+    display: flex;
+}
+
+.campo-boton button {
+    white-space: nowrap;
+}
+
+
+/* TABLAS */
+
+.datos {
+    margin-top: 35px;
+    background-color: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.titulo-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.titulo-seccion h2 {
+    margin-bottom: 5px;
+}
+
+.titulo-seccion p {
+    color: #666;
+}
+
+.contador {
+    background-color: #e9ecef;
+    padding: 9px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #222;
+    color: white;
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f6f6f6;
+}
+
+.precio-tabla {
+    font-weight: bold;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .formularios {
+        grid-template-columns: 1fr;
+    }
+
+    .form-reserva {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-boton button {
+        width: 100%;
+    }
+
+    .titulo-seccion {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
